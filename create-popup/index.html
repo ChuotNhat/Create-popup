@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ví dụ về popup</title>
+	<style type="text/css">
+		#head {
+			height: 200px;
+			background: pink;
+		}
+		#container {
+			height: 1000px;
+			background-color: yellow;
+			position: relative;
+		}
+		#container .con {
+			width: 200px;
+			height: 200px;
+			background: red;
+			position: absolute;
+			top:0px;
+		}
+		#foot {
+			height: 800px;
+			background: blue;
+		}
+
+	</style>
+	
+</head>
+<body>
+	<div id="head">Đây là header</div>
+
+	<!-- Div chứa popup -->
+	<div id="container">
+
+	<!-- Tương tự như popup của bạn -->
+		<div class="con">Đây là popup</div> 
+
+	</div>
+
+	<!-- #foot tương tự như footer -->
+	<div id="foot">Đây là footer</div>
+	
+
+	<!-- THêm jquery vào -->
+	<script type="text/javascript" src="jquery.min.js"></script>
+
+	<script type="text/javascript">
+
+		var head = $("#head").outerHeight(true); // Lấy chiều cao của id="#head"
+		var div = $("#container").outerHeight(true); // Lấy chiều cao của id="#container"
+
+		$(window).bind('scroll', function(){
+
+			var x = $(window).scrollTop(); 
+
+			if(x<=head) {
+				$(".con").css("position", "absolute");
+			}
+			
+			if(x>(head+div-200)) { // 200 là height của div .con
+				$(".con").css("position", "absolute");
+				$(".con").css("top", "auto");
+				$(".con").css("bottom", "10px");
+			}
+			if(x>head && (x<head+div-200)) {
+				$(".con").css("position", "fixed");
+				$(".con").css("top", "0px");
+			}
+		});
+
+	</script>
+</body> 
+</html>
